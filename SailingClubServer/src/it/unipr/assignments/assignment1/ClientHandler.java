@@ -252,13 +252,15 @@ public class ClientHandler extends Thread {
     }
 
     /**
-     * This method add a new boat into the database
+     * This method add a new boat into the database and automatically add the payment
      * @param fcOwner fiscal code of the owner's boat
      * @param boatName boat name
      * @param length length of the boat
      * @return an integer that provide the status of the request: 1 = success, 0 = not success , -1 = error
      */
     private int addBoat(String fcOwner,String boatName,int length){
+        String date = LocalDate.now().toString();
+        int price = 50;
         System.out.println(fcOwner + " " + boatName + " " + length);
         String controlQuery = "SELECT idBoat from boats WHERE fcOwner='"+fcOwner+"' AND name='"+boatName+"'";
         try {
@@ -267,6 +269,8 @@ public class ClientHandler extends Thread {
                 String addBoatQuery = "INSERT INTO boats (name,fcOwner,length) VALUES ('" + boatName + "','" + fcOwner + "'," + length+ ")";
                 System.out.println(addBoatQuery);
                 stmt.executeUpdate(addBoatQuery);
+                String addPaymentQuery = "INSERT INTO payments (fcPartner,deadLine,description,amount) VALUES ('"+fcOwner+"','"+date+"','Attracco barca chiamata "+boatName+"',"+price*length*0.005+")";
+                stmt.executeUpdate(addPaymentQuery);
                 return 1;
             } else {
                 return 0;
@@ -401,7 +405,7 @@ public class ClientHandler extends Thread {
     }
 
     private void connectionInit() throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sailingclub", "root", "SailingClub");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sailingclub", "root", "");
         stmt = connection.createStatement();
     }
 }

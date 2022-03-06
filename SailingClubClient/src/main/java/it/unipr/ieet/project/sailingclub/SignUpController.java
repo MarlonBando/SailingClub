@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -68,8 +69,7 @@ public class SignUpController{
     @FXML
     protected void BackTextPressed(MouseEvent event){
         try {
-            client.finish();
-            Parent root = FXMLLoader.load(getClass().getResource("adminHomePage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("adminHomePage.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

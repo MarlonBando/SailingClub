@@ -120,7 +120,6 @@ public class MyBoatsController implements Initializable {
         }catch (NumberFormatException ex){
             lengthTextField.setText("FORMAT NON VALIDO");
         }
-        fillList();
     }
 
     /**

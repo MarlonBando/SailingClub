@@ -11,7 +11,7 @@ public class Main {
     /**
      * Port number where the server receive clients.
      */
-    private static final int PORT_NUMBER = 10000;
+    private static final int PORT_NUMBER = 11000;
 
     /**
      * @param args command line, unused

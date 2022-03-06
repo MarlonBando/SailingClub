@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Class that send the request to the server to add a new payment
@@ -66,8 +67,7 @@ public class AddPaymentController {
     @FXML
     protected void BackTextPressed(MouseEvent event){
         try {
-            client.finish();
-            Parent root = FXMLLoader.load(getClass().getResource("adminHomePage.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("adminHomePage.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
@@ -38,7 +39,7 @@ public class PaymentSystemController implements Initializable {
     @FXML
     TextField deadLineCard;
     @FXML
-    TextField cvc;
+    PasswordField cvc;
     @FXML
     Text logMessage;
 
