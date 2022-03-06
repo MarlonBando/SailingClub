@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 06, 2022 alle 14:36
--- Versione del server: 10.4.21-MariaDB
--- Versione PHP: 7.3.31
+-- Creato il: Mar 06, 2022 alle 18:25
+-- Versione del server: 10.4.22-MariaDB
+-- Versione PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -166,8 +166,7 @@ INSERT INTO `registrations` (`idRegistration`, `fcPartner`, `fkCompetition`) VAL
 -- Indici per le tabelle `boats`
 --
 ALTER TABLE `boats`
-  ADD PRIMARY KEY (`idBoat`),
-  ADD KEY `fcOwner` (`fcOwner`);
+  ADD PRIMARY KEY (`idBoat`);
 
 --
 -- Indici per le tabelle `competition`
@@ -186,13 +185,15 @@ ALTER TABLE `partner`
 --
 ALTER TABLE `payments`
   ADD PRIMARY KEY (`idPayment`),
-  ADD KEY `FOREIGN KEY` (`fcPartner`) USING BTREE;
+  ADD KEY `fk_partner` (`fcPartner`);
 
 --
 -- Indici per le tabelle `registrations`
 --
 ALTER TABLE `registrations`
-  ADD PRIMARY KEY (`idRegistration`);
+  ADD PRIMARY KEY (`idRegistration`),
+  ADD KEY `fk_fcPartner` (`fcPartner`),
+  ADD KEY `fk_competition` (`fkCompetition`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
@@ -221,6 +222,23 @@ ALTER TABLE `payments`
 --
 ALTER TABLE `registrations`
   MODIFY `idRegistration` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Limiti per le tabelle scaricate
+--
+
+--
+-- Limiti per la tabella `payments`
+--
+ALTER TABLE `payments`
+  ADD CONSTRAINT `fk_partner` FOREIGN KEY (`fcPartner`) REFERENCES `partner` (`fiscalCode`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limiti per la tabella `registrations`
+--
+ALTER TABLE `registrations`
+  ADD CONSTRAINT `fk_competition` FOREIGN KEY (`fkCompetition`) REFERENCES `competition` (`idCompetition`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_fcPartner` FOREIGN KEY (`fcPartner`) REFERENCES `partner` (`fiscalCode`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
