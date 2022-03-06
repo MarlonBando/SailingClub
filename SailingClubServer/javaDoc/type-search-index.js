@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"it.unipr.assignments.assignment1","l":"ClientHandler"},{"p":"it.unipr.assignments.assignment1","l":"Main"}];updateSearchResults();

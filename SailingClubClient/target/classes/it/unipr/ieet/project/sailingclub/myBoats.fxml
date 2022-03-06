@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" styleClass="pageBackground" stylesheets="@css/login.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unipr.ieet.project.sailingclub.MyBoatsController">
+   <center>
+      <TableView fx:id="boatTable" prefHeight="528.0" prefWidth="888.0" style="-fx-background-color: YELLOW;" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="132.0" text="Id " />
+            <TableColumn fx:id="boatName" prefWidth="291.0" text="Nome imbarcazione" />
+            <TableColumn fx:id="length" prefWidth="258.0" text="Lunghezza" />
+        </columns>
+      </TableView>
+   </center>
+   <top>
+      <AnchorPane prefHeight="97.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="returnIcon" fitHeight="92.0" fitWidth="77.0" layoutX="7.0" layoutY="-1.0" onMouseClicked="#returnToHomePage" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="7.0">
+               <image>
+                  <Image url="@img/return.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin></AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefHeight="528.0" prefWidth="452.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="boatNameTextField" layoutX="179.0" layoutY="125.0" prefHeight="38.0" prefWidth="245.0" AnchorPane.rightAnchor="28.0" />
+            <TextField fx:id="lengthTextField" layoutX="179.0" layoutY="251.0" prefHeight="38.0" prefWidth="245.0" AnchorPane.rightAnchor="28.0" />
+            <Label layoutX="9.0" layoutY="117.0" prefHeight="49.0" prefWidth="159.0" text="Nome" textFill="#136e9d" AnchorPane.leftAnchor="9.0">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="240.0" prefHeight="49.0" prefWidth="158.0" text="Lunghezza" textFill="#136e9d" AnchorPane.leftAnchor="9.0">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Button fx:id="moorButton" layoutX="79.0" layoutY="379.0" mnemonicParsing="false" onAction="#moor" prefHeight="80.0" prefWidth="295.0" styleClass="loginButton" text="Attracca">
+               <font>
+                  <Font size="33.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children></AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="528.0" prefWidth="147.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <AnchorPane prefHeight="95.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>
