@@ -216,8 +216,9 @@ public class ClientHandler extends Thread {
             ResultSet rs = stmt.executeQuery(controlQuery);
             if(!rs.next()){
                 String registrationQuery = "INSERT INTO partner (fiscalCode,password,name,surname,address) VALUES ('"+CF+"','"+password+"','" +nome+"','"+surname+"','"+address+"')";
-                System.out.println(registrationQuery);
                 stmt.executeUpdate(registrationQuery);
+                String addPaymentQuery = "INSERT INTO payments (fcPartner,deadLine,description,amount) VALUES ('"+CF+"','"+LocalDate.now()+"','Iscrizione a "+"Quota di iscrizione annuale"+"',300)";
+                stmt.executeUpdate(addPaymentQuery);
                 return 1;
             }else{
                 return 0;
