@@ -1,0 +1,21 @@
+.loginText{
+    -fx-fill:#136E9B;
+}
+
+.tableText{
+    -fx-background-color:#136E9B;
+    -fx-textcolor: yellow;
+}
+
+.loginButton{
+    -fx-background-color:#136E9B;
+    -fx-text-fill:yellow;
+}
+
+.signInText{
+    -fx-fill:#136E9B;
+}
+
+.pageBackground{
+    -fx-background-color:yellow
+}
