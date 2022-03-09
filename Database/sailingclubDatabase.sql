@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 06, 2022 alle 18:25
+-- Creato il: Mar 09, 2022 alle 18:30
 -- Versione del server: 10.4.22-MariaDB
 -- Versione PHP: 8.1.2
 
@@ -39,17 +39,12 @@ CREATE TABLE `boats` (
 --
 
 INSERT INTO `boats` (`idBoat`, `name`, `fcOwner`, `length`) VALUES
-(1, 'mambo', 'fcOwner', 3233),
-(2, 'La Pinta', 'fcOwner', 34221),
 (3, 'La Pinta', 'a', 34221),
-(4, 'Nautilus', 'fcOwner', 34221),
 (5, 'babbo', 'a', 2312),
 (6, 'BarcaDeRio', 'a', 232312),
 (7, 'giovannaDarco', 'a', 65432),
 (8, 'Gianni Morandi', 'a', 34212),
-(9, 'Pappa Molla', 'a', 54321),
-(10, 'prova', 'a', 1),
-(11, 'a', 'a', 21212);
+(9, 'Pappa Molla', 'a', 54321);
 
 -- --------------------------------------------------------
 
@@ -76,7 +71,9 @@ INSERT INTO `competition` (`idCompetition`, `name`, `price`, `date`) VALUES
 (5, 'SIUM cup', 32, '2022-09-01'),
 (6, 'Gara delle Gare', 200, '2022-08-01'),
 (7, 'Cannavacciuolo Cup', 34, '2022-06-12'),
-(8, 'Sassari cup', 54, '2022-05-20');
+(8, 'Sassari cup', 54, '2022-05-20'),
+(9, 'Boat Race', 23, '2022-07-06'),
+(10, 'Garone', 25, '2022-07-14');
 
 -- --------------------------------------------------------
 
@@ -100,14 +97,11 @@ CREATE TABLE `partner` (
 INSERT INTO `partner` (`fiscalCode`, `password`, `name`, `surname`, `address`, `isAdmin`) VALUES
 ('a', 'a', '1', 'a', 'a', 0),
 ('admin', 'admin', 'admin', 'admin', 'via admin', 1),
-('bb', 'bb', '1', 'nn', 'bb', 0),
-('BNDMHL00D18D150T', 'aaa', 'Michele', 'Bandini', 'Via cairoli 137', 0),
+('b', 'b', 'b', 'b', 'b', 0),
 ('c', 'c', 'c', 'c', 'c', 0),
-('cf', 'matto', 'bando', 'babbo', 'aaa', 0),
-('cfTest', 'surnameTest', 'nameTest', 'pswTest', 'addressTest', 0),
 ('d', 'd', 'd', 'd', 'd', 0),
-('e', 'r', 'e', 'w', 'r', 0),
-('r', 'r', '1', 'r', 'r', 0);
+('w', 'w', 'w', 'w', 'w', 0),
+('z', 'z', 'z', 'z', 'z', 0);
 
 -- --------------------------------------------------------
 
@@ -134,7 +128,8 @@ INSERT INTO `payments` (`idPayment`, `fcPartner`, `deadLine`, `description`, `am
 (3, 'a', '2022-05-30', 'Iscrizione a Competizione matta Cup', 14, '2022-02-15', 1),
 (4, 'a', '2022-08-20', 'Iscrizione a prova', 34, '2022-02-16', 1),
 (5, 'a', '2022-07-14', 'Iscrizione a Asparagi Cup', 54, '2022-02-18', 1),
-(6, 'a', '2022-06-12', 'Iscrizione a Cannavacciuolo Cup', 34, '2022-02-18', 1);
+(6, 'a', '2022-06-12', 'Iscrizione a Cannavacciuolo Cup', 34, '2022-02-18', 1),
+(7, 'a', '2022-03-12', 'Iscrizione a prova prova', 34, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -156,7 +151,8 @@ INSERT INTO `registrations` (`idRegistration`, `fcPartner`, `fkCompetition`) VAL
 (7, 'a', 6),
 (8, 'a', 2),
 (9, 'a', 1),
-(10, 'a', 7);
+(10, 'a', 7),
+(11, 'z', 10);
 
 --
 -- Indici per le tabelle scaricate
@@ -166,7 +162,8 @@ INSERT INTO `registrations` (`idRegistration`, `fcPartner`, `fkCompetition`) VAL
 -- Indici per le tabelle `boats`
 --
 ALTER TABLE `boats`
-  ADD PRIMARY KEY (`idBoat`);
+  ADD PRIMARY KEY (`idBoat`),
+  ADD KEY `fkowner` (`fcOwner`);
 
 --
 -- Indici per le tabelle `competition`
@@ -209,23 +206,29 @@ ALTER TABLE `boats`
 -- AUTO_INCREMENT per la tabella `competition`
 --
 ALTER TABLE `competition`
-  MODIFY `idCompetition` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idCompetition` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT per la tabella `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `idPayment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idPayment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT per la tabella `registrations`
 --
 ALTER TABLE `registrations`
-  MODIFY `idRegistration` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idRegistration` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Limiti per le tabelle scaricate
 --
+
+--
+-- Limiti per la tabella `boats`
+--
+ALTER TABLE `boats`
+  ADD CONSTRAINT `fkowner` FOREIGN KEY (`fcOwner`) REFERENCES `partner` (`fiscalCode`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `payments`

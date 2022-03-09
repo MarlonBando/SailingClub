@@ -25,6 +25,7 @@ public class AddCompetitionController {
     private Scene scene;
     private Stage stage;
     private Client client = new Client();
+    private boolean clientInitialize= false;
 
     @FXML
     TextField competitionName;
@@ -44,6 +45,7 @@ public class AddCompetitionController {
     protected void createButtonPressed(ActionEvent event){
         try {
             client.ClientInit();
+            clientInitialize=true;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -73,6 +75,9 @@ public class AddCompetitionController {
     @FXML
     protected void BackTextPressed(MouseEvent event){
         try {
+            if(clientInitialize){
+                client.finish();
+            }
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("adminHomePage.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);

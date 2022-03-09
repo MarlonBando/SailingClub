@@ -27,6 +27,7 @@ public class SignUpController{
     private Scene scene;
     private Stage stage;
     private Client client = new Client();
+    private boolean clientInitialize = false;
 
     @FXML
     private TextField name;
@@ -49,6 +50,7 @@ public class SignUpController{
     protected void SignUpButtonPressed(ActionEvent event){
         try {
             client.ClientInit();
+            clientInitialize=true;
         }catch (IOException e){}
         int response = client.clientUserRegistration(name.getText(),surname.getText(),password.getText(),fiscalCode.getText(),address.getText());
         if(response == 1){
@@ -69,12 +71,14 @@ public class SignUpController{
     @FXML
     protected void BackTextPressed(MouseEvent event){
         try {
+            if(clientInitialize){
+                client.finish();
+            }
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("adminHomePage.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         }catch (IOException|NullPointerException ex){}
-
     }
 }

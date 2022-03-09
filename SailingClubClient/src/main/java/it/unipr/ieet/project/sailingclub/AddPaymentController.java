@@ -25,6 +25,7 @@ public class AddPaymentController {
     private Scene scene;
     private Stage stage;
     private Client client = new Client();
+    private boolean clientInitialize=false;
 
     @FXML
     TextField fiscalCode;
@@ -46,11 +47,14 @@ public class AddPaymentController {
     protected void addPaymentButtonPressed(ActionEvent event){
         try {
             client.ClientInit();
+            clientInitialize=true;
             String CF = fiscalCode.getText();
             Float amountPayment = Float.parseFloat(amount.getText());
             LocalDate date = deadLine.getValue();
             String descriptionPayment = description.getText();
             client.addPayment(CF,amountPayment,date.toString(),descriptionPayment);
+            errorMessage.setVisible(true);
+            errorMessage.setText("Pagamento aggiunto");
         } catch (NumberFormatException e){
             amount.setText("ERRORE FORMATO");
             e.printStackTrace();
@@ -67,12 +71,14 @@ public class AddPaymentController {
     @FXML
     protected void BackTextPressed(MouseEvent event){
         try {
+            if(clientInitialize){
+                client.finish();
+            }
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("adminHomePage.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         }catch (IOException|NullPointerException ex){}
-
     }
 }

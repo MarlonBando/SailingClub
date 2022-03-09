@@ -216,8 +216,9 @@ public class ClientHandler extends Thread {
             ResultSet rs = stmt.executeQuery(controlQuery);
             if(!rs.next()){
                 String registrationQuery = "INSERT INTO partner (fiscalCode,password,name,surname,address) VALUES ('"+CF+"','"+password+"','" +nome+"','"+surname+"','"+address+"')";
-                System.out.println(registrationQuery);
                 stmt.executeUpdate(registrationQuery);
+                String addPaymentQuery = "INSERT INTO payments (fcPartner,deadLine,description,amount) VALUES ('"+CF+"','"+LocalDate.now().toString()+"','Iscrizione annuale',300)";
+                stmt.executeUpdate(addPaymentQuery);
                 return 1;
             }else{
                 return 0;
@@ -267,7 +268,6 @@ public class ClientHandler extends Thread {
             ResultSet rs = stmt.executeQuery(controlQuery);
             if (!rs.next()) {
                 String addBoatQuery = "INSERT INTO boats (name,fcOwner,length) VALUES ('" + boatName + "','" + fcOwner + "'," + length+ ")";
-                System.out.println(addBoatQuery);
                 stmt.executeUpdate(addBoatQuery);
                 String addPaymentQuery = "INSERT INTO payments (fcPartner,deadLine,description,amount) VALUES ('"+fcOwner+"','"+date+"','Attracco barca chiamata "+boatName+"',"+price*length*0.005+")";
                 stmt.executeUpdate(addPaymentQuery);

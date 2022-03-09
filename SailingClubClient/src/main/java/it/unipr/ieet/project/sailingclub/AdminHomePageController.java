@@ -64,7 +64,6 @@ public class AdminHomePageController {
             stage.setScene(scene);
             stage.show();
         }catch (IOException e){}
-
     }
 
     /**
@@ -79,8 +78,9 @@ public class AdminHomePageController {
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        }catch (IOException e){}
-
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     /**
